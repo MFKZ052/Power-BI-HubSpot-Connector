@@ -18,13 +18,8 @@ function Auth($api_key){
 // Retrieve the API key from the request headers
 $headers = apache_request_headers();
 
-// Debug: Print all headers received
-header('Content-Type: application/json');
-echo json_encode($headers);
-exit();
-
-// Normalize header case by checking for common variations
-$api_key = $headers['api_key'] ?? $headers['Api_Key'] ?? $headers['API_KEY'] ?? null;
+// Try using the 'Authorization' header
+$api_key = $headers['Authorization'] ?? null;
 
 if (!$api_key) {
     http_response_code(401); // Unauthorized
@@ -42,4 +37,3 @@ if (!Auth($api_key)) {
 // If the API key is valid, proceed with the rest of the script
 // Your script's main logic goes here
 ?>
-
