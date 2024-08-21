@@ -18,11 +18,6 @@ function Auth($api_key){
 // Retrieve the API key from the query string
 $api_key = $_GET['api_key'] ?? null;
 
-// Debugging: Output the received API key
-header('Content-Type: application/json');
-echo json_encode(array("Received API Key" => $api_key));
-exit();
-
 if (!$api_key) {
     http_response_code(401); // Unauthorized
     echo json_encode(array("message" => "No API key provided."));
@@ -37,4 +32,7 @@ if (!Auth($api_key)) {
 }
 
 // If the API key is valid, proceed with the rest of the script
+// Your script's main logic goes here
+
+echo json_encode(array("message" => "Access granted, your API key is valid."));
 ?>
