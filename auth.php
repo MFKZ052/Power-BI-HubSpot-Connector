@@ -15,7 +15,7 @@ function Auth($api_key){
     return false;
 }
 
-// Retrieve the API key from the request headers
+// Retrieve the API key from the request headers - latest version 20117
 $headers = apache_request_headers();
 if (!isset($headers['api_key'])) {
     http_response_code(401); // Unauthorized
