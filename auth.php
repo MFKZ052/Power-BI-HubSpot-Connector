@@ -15,11 +15,8 @@ function Auth($api_key){
     return false;
 }
 
-// Retrieve the API key from the request headers
-$headers = apache_request_headers();
-
-// Try using the 'Authorization' header
-$api_key = $headers['Authorization'] ?? null;
+// Retrieve the API key from the query string
+$api_key = $_GET['api_key'] ?? null;
 
 if (!$api_key) {
     http_response_code(401); // Unauthorized
@@ -34,6 +31,9 @@ if (!Auth($api_key)) {
     exit();
 }
 
+// If the API key is valid, proceed with the rest of the script
+// Your script's main logic goes here
+?>
 // If the API key is valid, proceed with the rest of the script
 // Your script's main logic goes here
 ?>
