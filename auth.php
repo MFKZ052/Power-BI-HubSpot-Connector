@@ -15,20 +15,25 @@ function Auth($api_key){
     return false;
 }
 
-// Retrieve the API key from the request headers - latest version 20117
+// Retrieve the API key from the request headers
 $headers = apache_request_headers();
-if (!isset($headers['api_key'])) {
+
+// Normalize header case by checking for common variations
+$api_key = $headers['api_key'] ?? $headers['Api_Key'] ?? $headers['API_KEY'] ?? null;
+
+if (!$api_key) {
     http_response_code(401); // Unauthorized
     echo json_encode(array("message" => "No API key provided."));
     exit();
 }
 
 // Call the Auth function to validate the API key
-if (!Auth($headers['api_key'])) {
+if (!Auth($api_key)) {
     http_response_code(403); // Forbidden
     echo json_encode(array("message" => "Invalid API key."));
     exit();
 }
 
 // If the API key is valid, proceed with the rest of the script
+// Your script's main logic goes here
 ?>
