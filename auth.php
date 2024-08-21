@@ -1,6 +1,6 @@
 <?php
 
-function Auth($authorization){
+function Auth($api_key){
     // Define your valid tokens
     $valid_tokens = array(
         'FREETOKEN',
@@ -9,13 +9,13 @@ function Auth($authorization){
     );
     
     // Check if the provided token is valid
-    if(in_array($authorization, $valid_tokens)) return true;
+    if(in_array($api_key, $valid_tokens)) return true;
     
     // If the token is not valid, return false
     return false;
 }
 
-// Retrieve the API key from the request
+// Retrieve the API key from the request headers
 $headers = apache_request_headers();
 if (!isset($headers['api_key'])) {
     http_response_code(401); // Unauthorized
